@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
   <head>
     <title>Tasklist</title>
     <%= csrf_meta_tags %>
@@ -10,6 +10,10 @@
   </head>
 
   <body>
-    <%= yield %>
+    <div class="container">
+      <%= render 'layouts/flash_tasks' %>
+
+      <%= yield %>
+    </div>
   </body>
 </html>
