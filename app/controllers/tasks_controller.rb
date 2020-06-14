@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   
-  before_action :require_user_logged_in
+  before_action :require_user_logged_in, only: [:index, :show]
   
   def index
     @tasks = Task.all
@@ -11,7 +11,7 @@ class TasksController < ApplicationController
   end
 
   def new
-    @task = Task.new(content: "write an task here")
+    @task = Task.new
   end
 
   def create
@@ -22,7 +22,7 @@ class TasksController < ApplicationController
     else
       @tasks = current_user.tasks.order(id: :desc).page(params[:page])
       flash.now[:danger] = 'Taskの投稿に失敗しました。'
-      render 'toppages/index'
+      render 'tasks/new'
     end
   end
 
