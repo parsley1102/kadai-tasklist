@@ -1,18 +1,28 @@
+
+<% if logged_in? %>
+
 <ul class="navbar-nav">
-  <li class="nav-item"><%= link_to 'Signup', signup_path, class: 'nav-link' %></li>
-  <li class="nav-item"><%= link_to 'Login', login_path, class: 'nav-link' %></li>
+  <li class="dropdown-item"><%= link_to 'Logout', logout_path, method: :delete %></li>
 </ul>
 
 
-<h1>タスク一覧</h1>
-
+<p>Top page</p>
 <ul>
   <% @tasks.each do |task| %>
     <li><%= link_to task.id, task %> : <%= task.content %> &gt; <%= task.status %></li>
   <% end %>
 </ul>
+<%= link_to '新規タスクの追加', new_task_path %>
 
+<% else %>
 
-
-
-
+<ul class="navbar-nav">
+  <li class="nav-item"><%= link_to 'Login', login_path, class: 'nav-link' %></li>
+</ul>
+  <div class="center jumbotron">
+    <div class="text-center">
+      <h1>Welcome to the tasks</h1>
+      <%= link_to 'Sign up now!', signup_path, class: 'btn btn-lg btn-primary' %>
+    </div>
+  </div>
+<% end %>
