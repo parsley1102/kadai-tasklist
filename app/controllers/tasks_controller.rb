@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
   
   before_action :require_user_logged_in, only: [:index, :show]
-  before_action :correct_user, only: [:destroy, :update]
+  before_action :correct_user, only: [:destroy, :edit, :update, :show]
   
   def index
     if logged_in?
@@ -74,7 +74,7 @@ class TasksController < ApplicationController
   
   def correct_user
     @task = current_user.tasks.find_by(id: params[:id])
-    unless @tasks
+    unless @task
       redirect_to root_url
     end
   end
